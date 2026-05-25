@@ -145,7 +145,7 @@ Swagger is enabled by default.
 Example:
 
 ```bash
-https://localhost:5001/swagger
+https://localhost:7003/swagger
 ```
 
 ---
