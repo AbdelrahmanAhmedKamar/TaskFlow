@@ -1,8 +1,10 @@
-# Project & Task Management API
+# TaskFlow API
 
 A scalable backend API built with ASP.NET Core Web API using Clean Architecture principles.
 
-## Tech Stack
+---
+
+# Tech Stack
 
 - ASP.NET Core Web API (.NET 9)
 - Entity Framework Core
@@ -18,110 +20,35 @@ A scalable backend API built with ASP.NET Core Web API using Clean Architecture 
 
 The project follows Clean Architecture and is divided into the following layers:
 
-## 1. Domain
+## 1. Domain Layer
 Contains:
 - Entities
 - Enums
 - Interfaces
-- Business rules
+- Business Rules
 
-## 2. Application
-Contains:
-- CQRS Commands & Queries
-- Validators
-- Interfaces
-- MediatR Handlers
-
-## 3. Infrastructure
-Contains:
-- EF Core DbContext
-- Database configuration
-
-## 4. Presentation/API
-Contains:
-- Controllers
-- Middleware
-- Dependency Injection
-- JWT Configuration
-- Global Exception Handling
-
----
-
-# Features
-
-## Authentication
-- Register
-- Login with JWT
-
-## Projects
-- Create Project
-- Get All Projects
-- Get Project By Id
-- Update Project
-- Delete Project
-
-## Tasks
-- Create Task
-- Update Task Status
-- Get Tasks By Project
-- Delete Task
-
----
-
-# Setup Instructions
-
-## 1. Clone Repository
-
-```bash
-git clone <repo-url>
-cd ProjectName# Project & Task Management API
-
-A scalable backend API built with ASP.NET Core Web API using Clean Architecture principles.
-
-## Tech Stack
-
-- ASP.NET Core Web API (.NET 9)
-- Entity Framework Core
-- SQL Server
-- JWT Authentication
-- Clean Architecture
-- MediatR
-- FluentValidation
-
----
-
-# Architecture Overview
-
-The project follows Clean Architecture and is divided into the following layers:
-
-## 1. Domain
-Contains:
-- Entities
-- Enums
-- Interfaces
-- Business rules
-
-## 2. Application
+## 2. Application Layer
 Contains:
 - CQRS Commands & Queries
 - DTOs
 - Validators
-- Interfaces
 - MediatR Handlers
+- Abstractions
 
-## 3. Infrastructure
+## 3. Infrastructure Layer
 Contains:
-- EF Core DbContext
-- Repository implementations
-- Authentication services
-- Database configuration
+- Entity Framework Core
+- Database Context
+- Repository Implementations
+- JWT Token Generation
+- Dependency Injection
 
-## 4. Presentation/API
+## 4. Presentation/API Layer
 Contains:
 - Controllers
 - Middleware
-- Dependency Injection
-- JWT Configuration
+- Swagger Configuration
+- Authentication Configuration
 - Global Exception Handling
 
 ---
@@ -129,21 +56,33 @@ Contains:
 # Features
 
 ## Authentication
-- Register
-- Login with JWT
+- JWT Token Generation
+- Secured Endpoints using Authorization
 
-## Projects
+## Projects Module
 - Create Project
 - Get All Projects
 - Get Project By Id
 - Update Project
 - Delete Project
 
-## Tasks
+## Tasks Module
 - Create Task
 - Update Task Status
 - Get Tasks By Project
 - Delete Task
+
+---
+
+# Project Structure
+
+```bash
+src/
+ ├── TaskFlow.Api
+ ├── TaskFlow.Application
+ ├── TaskFlow.Domain
+ └── TaskFlow.Infrastructure
+```
 
 ---
 
@@ -152,5 +91,95 @@ Contains:
 ## 1. Clone Repository
 
 ```bash
-git clone <repo-url>
-cd ProjectName
+git clone https://github.com/AbdelrahmanAhmedKamar/TaskFlow.git
+```
+
+---
+
+## 2. Configure Database
+
+Update the connection string inside:
+
+```bash
+appsettings.json
+```
+
+Example:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=.;Database=TaskFlowDb;Trusted_Connection=True;TrustServerCertificate=True"
+}
+```
+
+---
+
+## 3. Apply Database Migrations
+
+```bash
+dotnet ef database update --project .\src\TaskFlow.Infrastructure --startup-project .\src\TaskFlow.Api
+```
+
+---
+
+## 4. Create New Migration
+
+```bash
+dotnet ef migrations add Initial --project .\src\TaskFlow.Infrastructure --startup-project .\src\TaskFlow.Api --output-dir Data\Migrations
+```
+
+---
+
+## 5. Run The Project
+
+```bash
+dotnet run --project .\src\TaskFlow.Api
+```
+
+---
+
+# Swagger Documentation
+
+Swagger is enabled by default.
+
+Example:
+
+```bash
+https://localhost:5001/swagger
+```
+
+---
+
+# Database Migrations
+
+Migration files are included inside:
+
+```bash
+src/TaskFlow.Infrastructure/Data/Migrations
+```
+
+---
+
+# Design Principles
+
+- Clean Architecture
+- SOLID Principles
+- Dependency Injection
+- Separation of Concerns
+- Scalable Structure
+- Maintainable Code
+
+---
+
+# Additional Implementations
+
+- Global Exception Handling
+- FluentValidation
+- Generic Result Pattern
+- CQRS Pattern using MediatR
+
+---
+
+# Author
+
+Abdelrahman Ahmed
